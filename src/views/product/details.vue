@@ -2,40 +2,23 @@
   <div class="introduce" :class="{ bgc: !isWhite }">
     <div class="content">
       <div class="img" v-show="isLeft">
-        <img @click.self="showBigImage(img)" :src="img" alt="" />
+        <img :src="img" alt="" />
       </div>
-      <div class="text" v-show="text1">
+      <div class="text">
         <strong>{{ title }}</strong>
         <p>{{ text1 }}</p>
         <p>{{ text2 }}</p>
       </div>
       <div class="img" v-show="!isLeft">
-        <img :src="img" @click.self="showBigImage(img)" alt="" />
+        <img :src="img" alt="" />
       </div>
-      <BigImg
-        :visible="photoVisible"
-        :url="bigImgUrl"
-        @closeClick="
-          () => {
-            photoVisible = false;
-          }
-        "
-      ></BigImg>
     </div>
   </div>
 </template>
 
 <script>
-import BigImg from "@/views/product/BigImg.vue";
 export default {
-  name: "Introduce",
-  components: { BigImg },
-  data() {
-    return {
-      photoVisible: false,
-      bigImgUrl: "",
-    };
-  },
+  name: "Details",
   props: {
     title: {
       type: String,
@@ -44,6 +27,12 @@ export default {
       type: String,
     },
     text2: {
+      type: String,
+    },
+    pname: {
+      type: String,
+    },
+    name: {
       type: String,
     },
     isLeft: {
@@ -62,15 +51,6 @@ export default {
       type: String,
     },
   },
-  methods: {
-    showBigImage(imgUrl) {
-      //点击图片函数，点击后，把photoVisible设置成true
-      if (imgUrl != "") {
-        this.photoVisible = true;
-        this.bigImgUrl = imgUrl;
-      }
-    },
-  },
 };
 </script>
 
@@ -80,34 +60,32 @@ export default {
 }
 .introduce {
   display: flex;
-  /* height: 549px; */
-  /* width: 100%; */
-  height: 400px;
+  height: 549px;
+  width: 100%;
+  justify-content: center;
   align-items: center;
 }
 .content {
   font-size: 14px;
   color: #666666;
   width: 1200px;
-  height: 300px;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 .content img {
-  /* height: 350px;
-  width: 600px; */
-  max-height: 350px;
-  max-width: 600px;
+  height: 350px;
+  width: 600px;
+}
+.img {
+  margin-right: 50px;
 }
 strong {
   font-size: 25px;
   font-weight: bold;
 }
 .text {
-  /* margin-right: 50px; */
+  margin-right: 50px;
   text-align: justify;
-  margin: 20px;
-  width: 300px;
 }
 </style>
